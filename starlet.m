@@ -1,4 +1,4 @@
-%%  README.TXT
+%%  STARLET.M
 %%
 %%  Version: november 2013.
 %%
@@ -19,17 +19,14 @@
 %% Coefficient (MCC). The difference between an image and its Ground 
 %% Truth is given by a colored comparison.
 %%
-%%	How to: in Matlab/Octave prompt, type:
-%% [D,L,COMP,MCC] = main(IMG,IMGGT);
-%% where img is the input image and IMGGT is its ground truth.
-%% This command asks the desired algorithm application level and returns
-%% starlet detail decomposition levels (D), algorithm output related to 
-%% each starlet decomposition level (R), comparison between IMG and 
-%% IMGGT for each starlet decomposition level (COMP) and Matthews 
-%% Correlation Coefficient for IMG and IMGGT in each level (MCC).
+%%  Input: IMG, a gray input image.
+%%         L, last desired decomposition level.
 %%
-%%	Required files: main.m, binarize.m, confusionmatrix.m, mattewscc.m, 
-%% starlet.m, twodimfilt.m, xtracttracks.m
+%%  Output: S, starlet approximation levels.
+%%          D, starlet detail levels.
+%%          
+%%	Other files required: main.m, binarize.m, confusionmatrix.m, 
+%% matthewscc.m, twodimfilt.m, xtracttracks.m
 %%
 %%  Please cite:
 %%
@@ -38,3 +35,33 @@
 %% method for segmentation of fission tracks in epidote crystal 
 %% photomicrographs, based on starlet wavelets. 2013.
 %%
+
+function [S,D] = starlet(IMG,L)
+
+%%% PRELIMINAR VARS %%%
+h = [1 4 6 4 1]; % 1D-h filter
+IMG = double(IMG);
+[M,N] = size(IMG); % image info
+S = zeros(M,N,L); D = S; % resulting vectors: approximation and details
+
+%%% MIRRORING CRITERIA: LOWER PIXEL NUMBER %%%
+if M < N
+	T = M;
+else
+	T = N;
+end
+
+auxS = padarray(IMG,[T T],'symmetric'); % mirroring
+
+%%% STARLET APLICATION %%%
+for i = 1:L
+	prevIMG = auxS; % previous level image
+	h2 = twodimfilt(h,i-1); % building 2D-h filter
+	
+	%%% WAVELET COEFFICIENTS %%%
+	auxS = conv2(prevIMG,h2,'same'); % approximation coefficients
+	auxD = prevIMG - auxS; % detail coefficients
+ 
+	S(:,:,i) = auxS(t+1:m+t,t+1:n+t); % mirroring correction
+	D(:,:,i) = auxD(t+1:m+t,t+1:n+t);
+end

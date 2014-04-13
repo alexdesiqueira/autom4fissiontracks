@@ -1,4 +1,4 @@
-%%  README.TXT
+%%  TWODIMFILT.M
 %%
 %%  Version: november 2013.
 %%
@@ -19,17 +19,13 @@
 %% Coefficient (MCC). The difference between an image and its Ground 
 %% Truth is given by a colored comparison.
 %%
-%%	How to: in Matlab/Octave prompt, type:
-%% [D,L,COMP,MCC] = main(IMG,IMGGT);
-%% where img is the input image and IMGGT is its ground truth.
-%% This command asks the desired algorithm application level and returns
-%% starlet detail decomposition levels (D), algorithm output related to 
-%% each starlet decomposition level (R), comparison between IMG and 
-%% IMGGT for each starlet decomposition level (COMP) and Matthews 
-%% Correlation Coefficient for IMG and IMGGT in each level (MCC).
+%%  Input: vec, a vector that will be used in "a trous" application.
+%%         i, corresponding level.
 %%
-%%	Required files: main.m, binarize.m, confusionmatrix.m, mattewscc.m, 
-%% starlet.m, twodimfilt.m, xtracttracks.m
+%%  Output: h2, vec in two dimensions according to "a trous" algorithm.
+%%          
+%%	Other files required: main.m, binarize.m, confusionmatrix.m, 
+%% mattewscc.m, starlet.m, xtracttracks.m
 %%
 %%  Please cite:
 %%
@@ -38,3 +34,23 @@
 %% method for segmentation of fission tracks in epidote crystal 
 %% photomicrographs, based on starlet wavelets. 2013.
 %%
+
+function h2 = twodimfilt(vec,i)
+
+if i == 0
+	h = vec;
+else
+	m = size(vec,2);
+	h = zeros(1,m+2^(i-1)*(m-1));
+	k = 0;
+
+	for j = 1:2^(i-1)+1:m+2^(i-1)*(m-1)
+		k = k+1;
+		h(j) = vec(k);
+	end
+end
+
+aux = sum(sum(h'*h)); % normalization
+h2 = (h'*h)/aux; % 2D filter
+
+end

@@ -1,4 +1,4 @@
-%%  README.TXT
+%%  XTRACTTRACKS.M
 %%
 %%  Version: november 2013.
 %%
@@ -19,17 +19,14 @@
 %% Coefficient (MCC). The difference between an image and its Ground 
 %% Truth is given by a colored comparison.
 %%
-%%	How to: in Matlab/Octave prompt, type:
-%% [D,L,COMP,MCC] = main(IMG,IMGGT);
-%% where img is the input image and IMGGT is its ground truth.
-%% This command asks the desired algorithm application level and returns
-%% starlet detail decomposition levels (D), algorithm output related to 
-%% each starlet decomposition level (R), comparison between IMG and 
-%% IMGGT for each starlet decomposition level (COMP) and Matthews 
-%% Correlation Coefficient for IMG and IMGGT in each level (MCC).
+%%  Input: IMG, a gray input image.
+%%         D, starlet decomposition levels.
 %%
-%%	Required files: main.m, binarize.m, confusionmatrix.m, mattewscc.m, 
-%% starlet.m, twodimfilt.m, xtracttracks.m
+%%  Output: 
+%%          R, output from adding algorithm.
+%%
+%%	Other files required: main.m, binarize.m, confusionmatrix.m, 
+%% mattewscc.m, starlet.m, twodimfilt.m
 %%
 %%  Please cite:
 %%
@@ -38,3 +35,22 @@
 %% method for segmentation of fission tracks in epidote crystal 
 %% photomicrographs, based on starlet wavelets. 2013.
 %%
+
+function R = xtracttracks(IMG,D)
+
+[M,N,level] = size(D); % extract info about D
+
+%%% PRELIMINAR VARS %%%
+Dmax = zeros(M,N,level);
+sum = 0;
+initlv = 3; %% begins from initlv value
+
+%%% ADDING STARLET DETAIL LEVELS %%%
+for i = initlv:level 
+	ratio = max(max(D(:,:,i))); ratio = 255/ratio;
+	Dmax(:,:,i) = uint8(ratio*D(:,:,i));
+
+	sum = sum + Dmax(:,:,i);
+end
+
+R =  uint8(sum);

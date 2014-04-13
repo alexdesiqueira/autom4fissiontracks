@@ -1,4 +1,4 @@
-%%  README.TXT
+%%  MATTHEWSCC.M
 %%
 %%  Version: november 2013.
 %%
@@ -19,16 +19,14 @@
 %% Coefficient (MCC). The difference between an image and its Ground 
 %% Truth is given by a colored comparison.
 %%
-%%	How to: in Matlab/Octave prompt, type:
-%% [D,L,COMP,MCC] = main(IMG,IMGGT);
-%% where img is the input image and IMGGT is its ground truth.
-%% This command asks the desired algorithm application level and returns
-%% starlet detail decomposition levels (D), algorithm output related to 
-%% each starlet decomposition level (R), comparison between IMG and 
-%% IMGGT for each starlet decomposition level (COMP) and Matthews 
-%% Correlation Coefficient for IMG and IMGGT in each level (MCC).
+%%  Input: TP, true positive pixels.
+%%         TN, true negative pixels.
+%%         FP, false positive pixels.
+%%         FN, false negative pixels.
 %%
-%%	Required files: main.m, binarize.m, confusionmatrix.m, mattewscc.m, 
+%%  Output: MCC, Matthews correlation coefficient.
+%%          
+%%	Other files required: main.m, binarize.m, confusionmatrix.m, 
 %% starlet.m, twodimfilt.m, xtracttracks.m
 %%
 %%  Please cite:
@@ -38,3 +36,7 @@
 %% method for segmentation of fission tracks in epidote crystal 
 %% photomicrographs, based on starlet wavelets. 2013.
 %%
+
+function MCC = matthewscc(TP,TN,FP,FN)
+
+MCC = ((TP*TN)-(FP*FN))/sqrt((TP+FP)*(TP+FN)*(TN+FP)*(TN+FN));

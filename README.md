@@ -1,10 +1,10 @@
 %%  README.TXT
 %%
-%%  Version: november 2013.
+%%  Version: april 2014.
 %%
 %%  This file is part of the supplementary material to 'An automatic 
 %% method for segmentation of fission tracks in epidote crystal 
-%% photomicrographs, based on starlet wavelets'.
+%% photomicrographs'.
 %%
 %%  Authors: 
 %% Alexandre Fioravante de Siqueira, siqueiraaf@gmail.com
@@ -36,5 +36,5 @@
 %% Alexandre Fioravante de Siqueira, Wagner Massayuki Nakasuga, Aylton 
 %% Pagamisse, Carlos Alberto Tello Saenz and Aldo Eloizo Job. An automatic 
 %% method for segmentation of fission tracks in epidote crystal 
-%% photomicrographs, based on starlet wavelets. 2013.
+%% photomicrographs. 2014.
 %%

@@ -33,8 +33,5 @@
 %%
 %%  Please cite:
 %%
-%% Alexandre Fioravante de Siqueira, Wagner Massayuki Nakasuga, Aylton 
-%% Pagamisse, Carlos Alberto Tello Saenz and Aldo Eloizo Job. An automatic 
-%% method for segmentation of fission tracks in epidote crystal 
-%% photomicrographs. 2014.
+%% de Siqueira, A. F., Nakasuga, W. M., Pagamisse, A., Sáenz, C. A. T. and Job, A. E., An automatic method for segmentation of fission tracks in epidote crystal photomicrographs. Computers and Geosciences, 2014, 69; 55-61. doi: 10.1016/j.cageo.2014.04.008
 %%

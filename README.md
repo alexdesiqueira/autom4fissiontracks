@@ -11,7 +11,7 @@ photomicrographs*.
  * Carlos Alberto Tello Saenz, tello@fct.unesp.br
  * Aldo Eloizo Job, job@fct.unesp.br
 
-### Description: this software applies algorithms to segment fission-tracks in crystal images by optical microscopy, based on starlets. Automatization of these algorithms is given using Matthews Correlation Coefficient (MCC). The difference between an image and its Ground Truth is given by a colored comparison.
+**Description:** this software applies algorithms to segment fission-tracks in crystal images by optical microscopy, based on starlets. Automatization of these algorithms is given using Matthews Correlation Coefficient (MCC). The difference between an image and its Ground Truth is given by a colored comparison.
 
 **How to:** in Matlab/Octave prompt, type:
 
@@ -24,4 +24,4 @@ This command asks the desired algorithm application level and returns starlet de
 
 ##  Please cite:
 
-de Siqueira, A. F., Nakasuga, W. M., Pagamisse, A., Sáenz, C. A. T. and Job, A. E., An automatic method for segmentation of fission tracks in epidote crystal photomicrographs. Computers and Geosciences, 2014, 69; 55-61. doi: 10.1016/j.cageo.2014.04.008
+de Siqueira, A. F., Nakasuga, W. M., Pagamisse, A., Sáenz, C. A. T. and Job, A. E., An automatic method for segmentation of fission tracks in epidote crystal photomicrographs. Computers and Geosciences, 2014, 69; 55-61. doi: [10.1016/j.cageo.2014.04.008](http://www.sciencedirect.com/science/article/pii/S0098300414000855)
